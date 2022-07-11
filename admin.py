@@ -24,7 +24,7 @@ super_helpme = {"name": "", "count": 0}
 def hashtags(update, context):
     context.user_data["first_name"] = update.message.from_user.first_name
 
-    if update.message.chat.type == "group":
+    if update.message.chat.type == "supergroup":
         message = update.message.text
         if "#agile" in message:
             if context.user_data["first_name"] not in agile_data:
