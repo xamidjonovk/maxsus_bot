@@ -1,9 +1,12 @@
-from telegram.ext import (Updater, CommandHandler, ConversationHandler, MessageHandler, Filters)
+from telegram.ext import (Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, )
 from buttons import register_button
 from register import start_conversation, get_first_name, get_last_name, get_directory, get_contact, submit
 from menu import head_menu, get_document, send_message, get_feedback
 from admin import admin_id, admin_menu, hashtags, stats, remove
+from telegram import ReplyKeyboardRemove
 
+def stop(update, context):
+    update.message.reply_text(text='stopped',reply_markup=ReplyKeyboardRemove())
 
 def start(update, context):
     user_id = update.message.from_user.id
@@ -23,6 +26,7 @@ def main():
     updater = Updater(token="5515845639:AAG8jcmMf4Vxt_2LrEGeoOutaj3zUwcV660")
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
+    dispatcher.add_handler(CommandHandler('stop', stop))
     dispatcher.add_handler(
         ConversationHandler(
             entry_points=[MessageHandler(Filters.regex('(Ro\'yhatdan o\'tish)'), start_conversation)],
