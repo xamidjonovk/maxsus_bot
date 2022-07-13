@@ -9,17 +9,20 @@ def stop(update, context):
     update.message.reply_text(text='stopped',reply_markup=ReplyKeyboardRemove())
 
 def start(update, context):
-    user_id = update.message.from_user.id
-    if user_id == admin_id:
-        admin_menu(update, context)
-    elif context.user_data.get("first_name"):
-        head_menu(update, context)
+    if update.message.chat.type == "supergroup":
+        update.message.reply_text(text="Ro'yxatdan o'tish uchun ushbu botga shaxsiydan start bosing.")
     else:
-        user = update.message.from_user.first_name
-        update.message.reply_text(f"Salom *{user}* \n"
-                                  f"*Botdan foydalanish uchun ro'yhatdan o'ting*",
-                                  reply_markup=register_button,
-                                  parse_mode="Markdown")
+        user_id = update.message.from_user.id
+        if user_id == admin_id:
+            admin_menu(update, context)
+        elif context.user_data.get("first_name"):
+            head_menu(update, context)
+        else:
+            user = update.message.from_user.first_name
+            update.message.reply_text(f"Salom *{user}* \n"
+                                      f"*Botdan foydalanish uchun ro'yhatdan o'ting*",
+                                      reply_markup=register_button,
+                                      parse_mode="Markdown")
 
 
 def main():
