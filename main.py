@@ -5,8 +5,10 @@ from menu import head_menu, get_document, send_message, get_feedback
 from admin import admin_id, admin_menu, hashtags, stats, remove
 from telegram import ReplyKeyboardRemove
 
+TOKEN = '5478251925:AAFCohl2ROk61S6oJTCwBHGTo5x3HFBodbw'
+
 def stop(update, context):
-    update.message.reply_text(text='stopped',reply_markup=ReplyKeyboardRemove())
+    update.message.reply_text(text='stopped', reply_markup=ReplyKeyboardRemove())
 
 def start(update, context):
     if update.message.chat.type == "supergroup":
@@ -26,7 +28,7 @@ def start(update, context):
 
 
 def main():
-    updater = Updater(token="5515845639:AAG8jcmMf4Vxt_2LrEGeoOutaj3zUwcV660")
+    updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('stop', stop))
